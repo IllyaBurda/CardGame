@@ -12,7 +12,7 @@ public class Game {
     Random random = new Random();
 
     public static void main(String[] args) {
-        Game game = new Game(new Player("John"), new Player("James"));
+        Game game = new Game(new Player("John"), new Player("Tom"));
         System.out.println(game);
     }
 
@@ -23,10 +23,16 @@ public class Game {
         setCosirAndShuffleDeck();
         giveCards();
         setFirstWalkPlayer();
-        if (playerOne.isActive) {
-            playerOne.makeTheMove();
-        } else {
-            playerTwo.makeTheMove();
+        while (true) {
+            if (playerOne.isActive) {
+                playerOne.makeTheMove(playerTwo,deck);
+                playerOne.isActive = false;
+                playerTwo.isActive = true;
+            } else {
+                playerTwo.makeTheMove(playerOne,deck);
+                playerTwo.isActive = false;
+                playerOne.isActive = true;
+            }
         }
     }
 
