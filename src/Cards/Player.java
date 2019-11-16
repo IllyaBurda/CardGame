@@ -120,7 +120,7 @@ public class Player {
     public void takeAllCards() {
         for (Map.Entry<Card, Card> card : Game.battlefield.entrySet()) {
             listCard.add(card.getKey());
-            if(card.getValue()!=null){
+            if (card.getValue() != null) {
                 listCard.add(card.getValue());
             }
         }
@@ -130,7 +130,6 @@ public class Player {
 
 
     public void replenishCard(List<Card> cards) {
-
         while (listCard.size() < 7 && cards.size() > 0) {
             listCard.add(cards.get(0));
             cards.remove(0);

@@ -11,11 +11,23 @@ public class Game {
     Player playerTwo;
     Random random = new Random();
 
+    public Game() {
+
+    }
+
     public static void main(String[] args) {
+//        ArrayList<String> coleList = new ArrayList<>();
+//        Collections.addAll(coleList, "wee", "srsr", "wweree","asasasaas","asd","zzzz");
+//        Game game = new Game();
+//        game.removeAfterIndex(coleList, 2);
         Game game = new Game(new Player("John"), new Player("Tom"));
         System.out.println(game);
     }
 
+    //deck.size() ==0
+    // playerOne.listCard.size()==0
+    //playerTwo.listCard.size()==0
+    //результат
     public Game(Player playerOne, Player playerTwo) {
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
@@ -23,13 +35,13 @@ public class Game {
         setCosirAndShuffleDeck();
         giveCards();
         setFirstWalkPlayer();
-        while (true) {
+        while ((deck.size() == 0 && playerOne.listCard.size() == 0) || (deck.size() == 0 && playerOne.listCard.size() == 0)) {
             if (playerOne.isActive) {
-                playerOne.makeTheMove(playerTwo,deck);
+                playerOne.makeTheMove(playerTwo, deck);
                 playerOne.isActive = false;
                 playerTwo.isActive = true;
             } else {
-                playerTwo.makeTheMove(playerOne,deck);
+                playerTwo.makeTheMove(playerOne, deck);
                 playerTwo.isActive = false;
                 playerOne.isActive = true;
             }
@@ -54,6 +66,9 @@ public class Game {
                 }
             }
         }
+
+        removeAfterIndex(deck,15);
+
     }
 
     private void setCosirAndShuffleDeck() {
@@ -119,5 +134,43 @@ public class Game {
 
     public Map<Card, Card> getBattlefield() {
         return battlefield;
+    }
+
+    public <T> void removeBeforeIndex(Collection<T> collection, int index) {
+        if (index > 0 && index < collection.size()) {
+            Iterator<T> iterator = collection.iterator();
+            for (int i = 0; i <= index; i++) {
+                iterator.next();
+                iterator.remove();
+            }
+        }else{
+            System.out.println("Ошибка!");
+            return;
+        }
+
+        System.out.println(collection);
+    }
+
+    public <T> void removeAfterIndex(Collection<T> collection, int index) {
+        if (index > 0 && index < collection.size()) {
+            Iterator<T> iterator = collection.iterator();
+            int k=0;
+            while(k<index){
+                iterator.next();
+                k++;
+            }
+           final  int  size=collection.size();
+            for (int i =0; i <size-index; i++) {
+                iterator.next();
+                iterator.remove();
+
+
+            }
+        }else{
+            System.out.println("Ошибка!");
+            return;
+        }
+
+        System.out.println(collection);
     }
 }
